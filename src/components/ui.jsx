@@ -83,10 +83,11 @@ export function MoneyInput({ cents, onCents, ...rest }) {
   useEffect(() => { setTxt(cents == null ? '' : (cents / 100).toString()) }, [cents])
   return (
     <div className="relative">
-      <span className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-3 text-[13px]">$</span>
+      <span className="absolute left-[11px] top-1/2 -translate-y-1/2 text-ink-3 text-[13px] pointer-events-none">$</span>
       <input
         {...rest}
-        className="field pl-6"
+        className="field"
+        style={{ paddingLeft: 23 }}
         inputMode="decimal"
         value={txt}
         onChange={e => setTxt(e.target.value)}

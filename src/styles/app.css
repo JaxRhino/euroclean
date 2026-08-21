@@ -57,6 +57,15 @@ textarea.field{height:auto;padding:9px 11px;line-height:1.5;resize:vertical}
 select.field{appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6'><path d='M0 0l5 6 5-6z' fill='%2367758A'/></svg>");background-repeat:no-repeat;background-position:right 11px center;padding-right:28px}
 .label{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;color:var(--ink3);margin-bottom:5px}
 
+/* A button sitting on the navy plate must not inherit the paper palette —
+   it rendered dark ink on dark navy and read as disabled. */
+.on-navy .btn{
+  background:transparent;border-color:rgba(239,244,250,.42);color:var(--navyInk);
+}
+.on-navy .btn:hover{background:rgba(239,244,250,.13);border-color:var(--navyInk)}
+.on-navy .btn-primary{background:var(--navyInk);border-color:var(--navyInk);color:var(--navy)}
+.on-navy .btn-primary:hover{background:#fff;border-color:#fff}
+
 /* ---- chips ---- */
 .chip{display:inline-flex;align-items:center;gap:5px;height:21px;padding:0 8px;font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;border:1px solid currentColor}
 .chip-navy{color:var(--navy);background:#EFF4FA}

@@ -60,11 +60,18 @@ export default function OsLayout() {
         {clock && (
           <span className="hidden sm:inline chip chip-brass" title="You are on the clock">On the clock</span>
         )}
-        <span className="hidden sm:block text-right leading-tight mr-1">
-          <span className="block text-[12.5px] font-medium">{a.staff?.full_name}</span>
-          <span className="block text-[10.5px] uppercase tracking-[.14em] text-ink-3">{a.staff?.role}</span>
-        </span>
-        <Avatar name={a.staff?.full_name} url={a.staff?.avatar_url} color={a.staff?.color} size={30} />
+        {a.isStaff && (
+          <>
+            <span className="hidden sm:block text-right leading-tight mr-1">
+              <span className="block text-[12.5px] font-medium">{a.staff.full_name}</span>
+              <span className="block text-[10.5px] uppercase tracking-[.14em] text-ink-3">{a.staff.role}</span>
+            </span>
+            <Avatar name={a.staff.full_name} url={a.staff.avatar_url} color={a.staff.color} size={30} />
+          </>
+        )}
+        {!a.isStaff && a.isClient && (
+          <NavLink to="/portal" className="btn btn-sm">Go to your account</NavLink>
+        )}
         <Button size="sm" variant="ghost" onClick={a.signOut}>Sign out</Button>
       </header>
 

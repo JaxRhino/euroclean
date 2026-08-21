@@ -32,7 +32,7 @@ export default function Overview() {
 
       {/* ---- the next visit, stated plainly ---- */}
       {next.loading ? <Loading /> : first ? (
-        <div className="card p-5 mb-5" style={{ background: 'var(--navy)', color: 'var(--navyInk)', borderColor: 'var(--navy)' }}>
+        <div className="card on-navy p-5 mb-5" style={{ background: 'var(--navy)', color: 'var(--navyInk)', borderColor: 'var(--navy)' }}>
           <div className="eyebrow" style={{ color: 'rgba(239,244,250,.6)' }}>Your next cleaning</div>
           <div className="disp mt-1.5" style={{ fontSize: 30, lineHeight: 1.1, fontWeight: 300, letterSpacing: '-.02em' }}>
             {fmtDayLong(first.scheduled_on)}
@@ -42,7 +42,7 @@ export default function Overview() {
             {' · '}{first.properties?.street}
           </div>
           <div className="flex items-center gap-2 mt-4 flex-wrap">
-            <Link to="/portal/schedule" className="btn">Change this visit</Link>
+            <Link to="/portal/schedule" className="btn btn-primary">Change this visit</Link>
             <Link to="/portal/messages" className="btn">Message the office</Link>
           </div>
         </div>
