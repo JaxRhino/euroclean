@@ -1,11 +1,16 @@
 import { createClient } from '@supabase/supabase-js'
 
-const url = import.meta.env.VITE_SUPABASE_URL
-const key = import.meta.env.VITE_SUPABASE_ANON_KEY
+// The publishable key is public by design — it is in every page that talks to Supabase.
+// Keeping it as a fallback means a fresh deploy is never a white screen because an
+// environment variable was not copied across. RLS, not this key, is the security.
+const FALLBACK_URL = 'https://oyuquouhjnrfzcedeltq.supabase.co'
+const FALLBACK_KEY = 'sb_publishable_cfDx0TJ3P48J80jBhIyYTA_uGj6UW-l'
 
-if (!url || !key) {
-  // Fail loudly at boot rather than rendering an app that silently reads nothing.
-  console.error('[euroclean] Supabase env missing. Set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY.')
+const url = import.meta.env.VITE_SUPABASE_URL || FALLBACK_URL
+const key = import.meta.env.VITE_SUPABASE_ANON_KEY || FALLBACK_KEY
+
+if (!import.meta.env.VITE_SUPABASE_URL) {
+  console.warn('[euroclean] VITE_SUPABASE_URL is not set; using the built-in project.')
 }
 
 export const supabase = createClient(url, key, {
