@@ -5,6 +5,7 @@ import { Wordmark } from './components/Brand'
 import { Guard } from './components/Guard'
 
 import Login from './pages/Login'
+import Pay from './pages/Pay'
 import OsLayout from './components/OsLayout'
 import PortalLayout from './components/PortalLayout'
 
@@ -75,6 +76,9 @@ export default function App() {
   return (
     <Routes>
       <Route path="/" element={<Landing />} />
+
+      {/* the link the office texts — no account needed, the token is the authorisation */}
+      <Route path="/pay/:token" element={<Pay />} />
 
       {/* ---------------- staff operating system ---------------- */}
       <Route path="/os" element={<RequireSession><OsLayout /></RequireSession>}>
