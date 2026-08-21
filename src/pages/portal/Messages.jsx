@@ -118,7 +118,12 @@ function Thread({ id, clientId, onSent }) {
     if (!body.trim()) return
     setBusy(true)
     try {
-      await must(supabase.from('client_messages').insert({ thread_id: id, from_client: true, body: body.trim() }).select('id').single())
+      const row = await must(
+        supabase.from('client_messages')
+          .insert({ thread_id: id, from_client: true, body: body.trim() })
+          .select('*,staff(full_name)').single()
+      )
+      setMsgs(m => m.some(x => x.id === row.id) ? m : [...m, row])
       setBody(''); onSent()
     } catch (e) { toast.error(e.message) } finally { setBusy(false) }
   }

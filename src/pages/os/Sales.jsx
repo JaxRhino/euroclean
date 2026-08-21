@@ -10,6 +10,7 @@ import {
 } from '../../components/ui'
 
 export default function Sales() {
+  const a = useAuth()
   const toast = useToast()
   const [open, setOpen] = useState(null)      // lead id in the drawer
   const [manage, setManage] = useState(false)
@@ -39,10 +40,13 @@ export default function Sales() {
     try {
       const saved = await must(supabase.from('leads').update({ stage_key: stageKey }).eq('id', lead.id).select('id,stage_key'))
       if (!saved?.length) throw new Error('The card did not move — the update matched no row.')
-      await supabase.from('lead_notes').insert({
-        lead_id: lead.id, kind: 'stage',
+      // staff_id is not optional here — the insert policy requires it, and without it
+      // the note was refused silently and the timeline lost every stage change.
+      const { error: noteErr } = await supabase.from('lead_notes').insert({
+        lead_id: lead.id, staff_id: a.user.id, kind: 'stage',
         body: `Moved to ${(stages.data || []).find(s => s.key === stageKey)?.label || stageKey}`,
       })
+      if (noteErr) console.error('[sales] stage note not written', noteErr.message)
     } catch (e) {
       toast.error(e.message)
       leads.reload()

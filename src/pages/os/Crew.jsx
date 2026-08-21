@@ -131,7 +131,9 @@ function AddStaff({ open, onClose, onDone }) {
       })
       if (error) throw error
       if (!data?.ok) throw new Error(data?.error || 'The employee was not created.')
-      toast.ok(`${f.full_name} added. An invitation is on the way to ${f.email}.`)
+      // Created, but the invitation may not have sent. Say which happened.
+      if (data.invited === false) toast.error(data.error || `${f.full_name} was added, but the invitation email did not send.`)
+      else toast.ok(`${f.full_name} added. An invitation is on the way to ${f.email}.`)
       onClose(); onDone()
       setF({ full_name: '', email: '', phone: '', role: 'cleaner', rate: 0, color: '#123E7C' })
     } catch (e) { toast.error(e.message) } finally { setBusy(false) }

@@ -153,7 +153,14 @@ function Room({ channel, onCallStart, onChanged }) {
     if (!text || sending) return
     setSending(true)
     try {
-      await must(supabase.from('chat_messages').insert({ channel_id: channel.id, staff_id: a.user.id, body: text }).select().single())
+      const row = await must(
+        supabase.from('chat_messages')
+          .insert({ channel_id: channel.id, staff_id: a.user.id, body: text })
+          .select('*,staff(id,full_name,color,avatar_url)').single()
+      )
+      // Show it now. The realtime echo dedupes on id, so this is not a second copy —
+      // and the message no longer depends on a socket to appear.
+      setMsgs(m => m.some(x => x.id === row.id) ? m : [...m, row])
       setBody('')
       onChanged()
     } catch (e) { toast.error(e.message) } finally { setSending(false) }
