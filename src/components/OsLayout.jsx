@@ -4,6 +4,7 @@ import { useAuth } from '../lib/AuthContext'
 import { supabase } from '../lib/supabase'
 import { Wordmark } from './Brand'
 import { Avatar, Button } from './ui'
+import Alerts from './Alerts'
 
 const NAV = [
   { to: '/os',            label: 'Today',     end: true,  need: 'staff' },
@@ -60,6 +61,7 @@ export default function OsLayout() {
         {clock && (
           <span className="hidden sm:inline chip chip-brass" title="You are on the clock">On the clock</span>
         )}
+        {a.isStaff && <Alerts />}
         {a.isStaff && (
           <>
             <span className="hidden sm:block text-right leading-tight mr-1">
