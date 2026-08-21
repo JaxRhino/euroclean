@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{
+  --paper:#F8F3E8; --paper2:#F1EADB; --paper3:#E9DFCA;
+  --ink:#0E1E33; --ink2:#39485F; --ink3:#67758A;
+  --line:#E1D7C5; --line2:#CCBEA6;
+  --navy:#123E7C; --navy2:#1B5FBF; --navyInk:#EFF4FA;
+  --brass:#8A6209; --gold:#E8A81C; --goldDk:#C68C0B;
+  --moss:#3F6B4A; --rust:#9C3B27;
+}
+
+html,body,#root{height:100%}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:"Inter Tight",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+}
+*,*::before,*::after{box-sizing:border-box}
+button{font:inherit;color:inherit}
+input,select,textarea{font:inherit;color:inherit}
+
+/* ---- type ---- */
+.disp{font-family:"Fraunces",Georgia,serif;font-weight:400;letter-spacing:-.02em}
+.eyebrow{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;color:var(--ink3)}
+.num{font-family:"Fraunces",Georgia,serif;font-weight:300;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.tnum{font-variant-numeric:tabular-nums}
+
+/* ---- surfaces ---- */
+.card{background:#fff;border:1px solid var(--line);box-shadow:0 1px 0 rgba(14,30,51,.03)}
+.rule{border-top:1px solid var(--line)}
+
+/* ---- controls ---- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:7px;
+  height:36px;padding:0 15px;border:1px solid var(--line2);background:#fff;
+  font-size:13.5px;font-weight:500;cursor:pointer;transition:background .12s,border-color .12s;
+  white-space:nowrap;
+}
+.btn:hover{background:var(--paper2);border-color:var(--ink3)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn-primary{background:var(--navy);border-color:var(--navy);color:var(--navyInk)}
+.btn-primary:hover{background:#0d3266;border-color:#0d3266}
+.btn-ghost{border-color:transparent;background:transparent}
+.btn-ghost:hover{background:var(--paper2);border-color:var(--line)}
+.btn-danger{border-color:var(--rust);color:var(--rust)}
+.btn-danger:hover{background:#9C3B27;color:#fff}
+.btn-sm{height:29px;padding:0 10px;font-size:12.5px}
+
+.field{
+  width:100%;height:36px;padding:0 11px;background:#fff;border:1px solid var(--line2);
+  font-size:14px;outline:none;
+}
+.field:focus{border-color:var(--navy);box-shadow:inset 0 0 0 1px var(--navy)}
+textarea.field{height:auto;padding:9px 11px;line-height:1.5;resize:vertical}
+select.field{appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6'><path d='M0 0l5 6 5-6z' fill='%2367758A'/></svg>");background-repeat:no-repeat;background-position:right 11px center;padding-right:28px}
+.label{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;color:var(--ink3);margin-bottom:5px}
+
+/* ---- chips ---- */
+.chip{display:inline-flex;align-items:center;gap:5px;height:21px;padding:0 8px;font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;border:1px solid currentColor}
+.chip-navy{color:var(--navy);background:#EFF4FA}
+.chip-moss{color:var(--moss);background:#EEF4EF}
+.chip-brass{color:var(--brass);background:#FAF3E2}
+.chip-rust{color:var(--rust);background:#FBEFEC}
+.chip-mute{color:var(--ink3);background:var(--paper2)}
+
+/* ---- table ---- */
+.tbl{width:100%;border-collapse:collapse;font-size:13.5px}
+.tbl th{
+  text-align:left;font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;
+  font-weight:600;color:var(--ink3);padding:9px 12px;border-bottom:1px solid var(--line2);
+  background:var(--paper2);white-space:nowrap;
+}
+.tbl td{padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:middle}
+.tbl tbody tr:hover{background:#FCFAF5}
+.tbl tbody tr.rowlink{cursor:pointer}
+
+/* ---- scroll ---- */
+.scroll{overflow:auto}
+.scroll::-webkit-scrollbar{width:9px;height:9px}
+.scroll::-webkit-scrollbar-thumb{background:var(--line2)}
+.scroll::-webkit-scrollbar-track{background:transparent}
+
+/* ---- drag ---- */
+.dragging{opacity:.35}
+.dropzone{background:#EFF4FA;outline:1px dashed var(--navy2);outline-offset:-3px}
+
+/* ---- misc ---- */
+.hairline::after{content:"";display:block;height:1px;background:var(--line);margin-top:9px}
+@keyframes fadein{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:none}}
+.fadein{animation:fadein .16s ease-out}
